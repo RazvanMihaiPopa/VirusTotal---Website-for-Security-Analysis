@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="paginalogin.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wave">
+        <img src="wavey.png" alt="">
+    </div>
+    <div class="container">
+		<div class="img">
+			<img src="undraw_dev_focus_re_6iwt.svg">
+		</div>
+		<div class="login-content">
+			<form action="landing.html" method="post" onsubmit="submitForm(event)">
+				<img src="undraw_personal_info_re_ur1n.svg">
+				<h2 class="title">Get started</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>Username</h5>
+           		   		<input type="text" id="username" name="username" class="input" required>
+           		   </div>
+           		</div>
+                <div class="input-div email">
+                    <div class="i"> 
+                         <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                         <h5>Email</h5>
+                         <input type="text" id="userEmail" name="userEmail" class="input" required>
+                    </div>
+              	</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Password</h5>
+           		    	<input type="password" id="password" name="password" class="input" required>
+            	   </div>
+            	</div>
+            	<a href="login.html">Already have an account?</a>
+				<a href="landing.html">Go back to home page</a>
+            	<input type="submit" class="btn" value="Signup">
+            </form>
+        </div>
+        <script type="text/javascript" src="main.js"></script>
+		<script src="signup.js"></script>
+    </div>
+</body>
+</html>

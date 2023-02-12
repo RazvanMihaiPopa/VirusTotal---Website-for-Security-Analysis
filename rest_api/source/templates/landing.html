@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="landing.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <nav>
+            <img src="logovirustotal.png" class="logo" alt="">
+            <div class="buttonsc">
+                <button onclick="window.location='files.html'" class="btn">Files</button>
+                <button onclick="window.location='urls.html'" class="btn">Urls</button>
+                <button onclick="window.location='landing.html'" class="btn">Del Acc</button>
+                <button onclick="window.location='login.html'" class="btn">Login</button>
+                <button onclick="window.location='signup.html'" class="btn">Signup</button>
+            </div>
+        </nav>
+    </div>
+    <div class="maincontent">
+    <div class="pickone">
+        <div class="btn-box">
+            <button id="btn1" onclick="file()">FILE</button>
+            <button id="btn2" onclick="url()">URL</button>
+            <button id="btn3" onclick="search()">DELETE</button>
+        </div>
+        <div id="content1" class="content">
+            <div  class="content-left">
+                <h1>Add a file to check for vulnerabilities</h1>
+                <form method="post" onsubmit="submitFileForm(event)">
+                    <label for="binData" class="fileee">Select file</label>
+                    <input type="file" id="binData" name="binData" hidden>
+                    <input type="submit" value="Submit" class="btn">
+                </form>
+                <div class="subtitle">
+                    By submitting data above, you are agreeing to our Terms of Service and Privacy Policy, and to the sharing of your Sample submission with the security community. Please do not submit any personal information; VirusTotal is not responsible for the contents of your submission.
+                </div>
+            </div>
+            <div class="content-right">
+                <img src="addfile.svg" alt="pula">
+            </div>
+        </div>
+        <div id="content2" class="content">
+            <div class="content-left">
+                <h1>Add an URL</h1>
+                <form method="post" onsubmit="submitUrlForm(event)">
+                    <div class="input-div">
+                        <input type="text" id="urlAddress" name="urlAddress">
+                    </div>
+                    <input type="submit" value="Submit" class="btn">
+                </form>
+                <div class="subtitle">
+                    By submitting data above, you are agreeing to our Terms of Service and Privacy Policy, and to the sharing of your Sample submission with the security community. Please do not submit any personal information; VirusTotal is not responsible for the contents of your submission.
+                </div>
+            </div>
+            <div class="content-right">
+                <img src="pagenot.svg" alt="pula">
+            </div>
+        </div>
+        <div id="content3" class="content">
+            <div class="content-left">
+                <h1>Delete a file/URL</h1>
+                <form method="post" onsubmit="Delete()">
+                    <div class="input-div">
+                        <input type="text" id="urlAddress" name="urlAddress" class="input-div">
+                    </div>
+                    <input type="submit" value="Submit" class="btn">
+                </form>
+                <div class="subtitle">
+                    By submitting data above, you are agreeing to our Terms of Service and Privacy Policy, and to the sharing of your Sample submission with the security community. Please do not submit any personal information; VirusTotal is not responsible for the contents of your submission.
+                </div>
+            </div>
+            <div class="content-right">
+                <img src="deleteee.svg" alt="pula">
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        var content1 = document.getElementById("content1");
+        var content2 = document.getElementById("content2");
+        var content3 = document.getElementById("content3");
+        var btn1 = document.getElementById("btn1");
+        var btn2 = document.getElementById("btn2");
+        var btn3 = document.getElementById("btn3");
+        function file() {
+            content1.style.display = "flex";
+            content2.style.display = "none";
+            content3.style.display = "none";
+            btn1.style.color = "black";
+            btn2.style.color = "white";
+            btn3.style.color = "white";
+        }
+        function url() {
+            content1.style.display = "none";
+            content2.style.display = "flex";
+            content3.style.display = "none";
+            btn1.style.color = "white";
+            btn2.style.color = "black";
+            btn3.style.color = "white";
+        }
+        function search() {
+            content1.style.display = "none";
+            content2.style.display = "none";
+            content3.style.display = "flex";
+            btn1.style.color = "white";
+            btn2.style.color = "white";
+            btn3.style.color = "black";
+        }
+        
+        function submitFileForm(event) {
+                event.preventDefault();
+                const url = "http://localhost:8080/api/v1/add_file";
+                const formData = new FormData(event.target);
+                const data = {};
+                formData.forEach((value, key) => (data[key] = value));
+                var file = document.getElementById('binData').files[0];
+                let file_path = document.getElementById('binData').value;
+                let file_name = file_path.split(/(\\|\/)/g).pop();
+                console.log(file_name);
+                data["fileName"] = file_name;
+                data["userEmail"] = localStorage.getItem("userEmail");
+                localStorage.getItem("username");
+                console.log(data);
+                fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "AccessToken": localStorage.getItem("AccessToken"),
+                    },
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+            }
+            function submitUrlForm(event) {
+                event.preventDefault();
+                const url = "http://localhost:8080/api/v1/add_url";
+                const formData = new FormData(event.target);
+                const data = {};
+                formData.forEach((value, key) => (data[key] = value));
+                data["userEmail"] = localStorage.getItem("userEmail");
+                
+                console.log(data);
+                fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "AccessToken": localStorage.getItem("AccessToken"),
+                    },
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+            }
+            function fileToByteArray(file) {
+                return new Promise((resolve, reject) => {
+                    try {
+                        let reader = new FileReader();
+                        let fileByteArray = [];
+                        reader.readAsArrayBuffer(file);
+                        reader.onloadend = (evt) => {
+                            if (evt.target.readyState == FileReader.DONE) {
+                                let arrayBuffer = evt.target.result,
+                                    array = new Uint8Array(arrayBuffer);
+                                for (byte of array) {
+                                    fileByteArray.push(byte);
+                                }
+                            }
+                            resolve(fileByteArray);
+                        }
+                    }
+                    catch (e) {
+                        reject(e);
+                    } 
+                })
+            }
+    </script>
+</body>
+</html>

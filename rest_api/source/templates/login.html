@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="paginalogin.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wave">
+        <img src="wavey.png" alt="">
+    </div>
+    <div class="container">
+		<div class="img">
+			<img src="undraw_pair_programming_re_or4x.svg">
+		</div>
+		<div class="login-content">
+			<form action="landing.html" method="post" onsubmit="submitForm(event)">
+				<img src="undraw_personal_info_re_ur1n.svg">
+				<h2 class="title">Welcome</h2>
+                <div class="input-div email">
+                    <div class="i"> 
+                         <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                         <h5>Email</h5>
+                         <input type="text" id="userEmail" name="userEmail" class="input" required>
+                    </div>
+              	</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Password</h5>
+           		    	<input type="password" id="password" name="password" class="input" required>
+            	   </div>
+            	</div>
+            	<a href="signup.html">Don't have an account?</a>
+				<a href="landing.html">Go back to home page</a>
+            	<input type="submit" class="btn" value="Signup">
+            </form>
+        </div>
+        <script>
+			const inputs = document.querySelectorAll(".input");
+
+			function addcl(){
+				let parent = this.parentNode.parentNode;
+				parent.classList.add("focus");
+			}
+
+			function remcl(){
+				let parent = this.parentNode.parentNode;
+				if(this.value == ""){
+					parent.classList.remove("focus");
+				}
+			}
+
+			inputs.forEach(input => {
+				input.addEventListener("focus", addcl);
+				input.addEventListener("blur", remcl);
+			});
+
+			function submitForm(event) {
+				event.preventDefault();
+				const url = "http://localhost:8080/api/v1/login";
+				const formData = new FormData(event.target);
+				const data = {};
+				formData.forEach((value, key) => (data[key] = value));
+				console.log(data);
+				fetch(url, {
+					method: "POST",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json",
+					},
+				})
+				.then((response) => response.json())
+				.then((data) => {
+					localStorage.setItem("AccessToken", data.AccessToken);
+					console.log("Success:", data);
+				})
+				.catch((error) => {
+					console.error("Error:", error);
+				});
+				localStorage.setItem("userEmail", data["userEmail"]);
+				localStorage.setItem("username", data["username"]);
+			}
+		</script>
+    </div>
+</body>
+</html>
