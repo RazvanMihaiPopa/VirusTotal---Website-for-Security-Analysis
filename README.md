@@ -32,5 +32,9 @@ Succesfully adds a user to the database!
 ### Big thanks to this guy for the look of the login and sign up page! Mostly inspired from him, i changed the theme and added some things to switch it up!
 https://www.youtube.com/watch?v=t-EMinSz_Tk&t=315s
 
+### Testing
+
+Having docker installed and opened, you have to type 'make start' in the docker folder. You'll have to wait a bit. Then you open your HTML website and try creating an user and inspecting the page to see what happens!
+
 
 
