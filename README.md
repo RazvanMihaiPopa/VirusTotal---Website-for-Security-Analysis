@@ -29,9 +29,6 @@ Succesfully adds a user to the database!
 ![signuppage](https://user-images.githubusercontent.com/95059633/218327855-aa672fe2-25f3-46ec-8068-89fab59f7012.PNG)
 
 
-### Big thanks to this guy for the look of the login and sign up page! Mostly inspired from him, i changed the theme and added some things to switch it up!
-https://www.youtube.com/watch?v=t-EMinSz_Tk&t=315s
-
 ### Testing
 
 Having docker installed and opened, you have to type 'make start' in the docker folder. You'll have to wait a bit. Then you open your HTML website and try creating an user and inspecting the page to see what happens!
