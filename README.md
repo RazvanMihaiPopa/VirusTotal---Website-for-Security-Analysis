@@ -3,7 +3,7 @@
 <table>
 <tr>
 <td>
-  A homework assignment during the PCLP4 course, where we had to design the front-end for a virustotal-like website and connect the front-end to the back-end. I also learned some stuff about dockers, MongoDB, HTTP previously from the milestones 1(backend) and 2(middleware).
+  A homework assignment during the PCLP4 course, where we had to design the front-end for a virustotal-like website and connect the front-end to the back-end. I also learned a bit about dockers, MongoDB, HTTP previously from the milestones 1(backend) and 2(middleware).
 </td>
 </tr>
 </table>
